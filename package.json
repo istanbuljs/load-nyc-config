@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"pretest": "xo",
-		"test": "tap --test-ignore=helpers",
+		"test": "tap",
 		"snap": "npm test -- --snapshot"
 	},
 	"engines": {
