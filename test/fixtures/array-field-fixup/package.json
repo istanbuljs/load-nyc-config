@@ -1,0 +1,8 @@
+{
+	"nyc": {
+		"require": "esm",
+		"extension": ".js",
+		"include": "index.js",
+		"exclude": "test.js"
+	}
+}

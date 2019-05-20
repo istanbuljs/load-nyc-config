@@ -1,0 +1,7 @@
+{
+	"nyc": {
+		"exclude-after-remap": true,
+		"exclude-node-modules": true,
+		"skip-full": true
+	}
+}

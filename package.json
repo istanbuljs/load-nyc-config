@@ -1,0 +1,39 @@
+{
+	"name": "@istanbuljs/load-nyc-config",
+	"version": "1.0.0",
+	"description": "Utility function to load nyc configuration",
+	"main": "index.js",
+	"scripts": {
+		"pretest": "xo",
+		"test": "tap --test-ignore=helpers",
+		"snap": "npm test -- --snapshot"
+	},
+	"engines": {
+		"node": ">=8"
+	},
+	"license": "ISC",
+	"files": [
+		"index.js"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/istanbuljs/load-nyc-config.git"
+	},
+	"bugs": {
+		"url": "https://github.com/istanbuljs/load-nyc-config/issues"
+	},
+	"homepage": "https://github.com/istanbuljs/load-nyc-config#readme",
+	"dependencies": {
+		"camelcase": "^5.3.1",
+		"decamelize": "^3.2.0",
+		"find-up": "^4.0.0",
+		"js-yaml": "^3.13.1"
+	},
+	"devDependencies": {
+		"tap": "^14.0.0",
+		"xo": "^0.24.0"
+	},
+	"xo": {
+		"ignores": "tap-snapshots/**"
+	}
+}
