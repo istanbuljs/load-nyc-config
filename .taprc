@@ -1,3 +1,4 @@
 {
-	"test-ignore": "helpers"
+	"test-ignore": "helpers",
+	"check-coverage": true
 }
