@@ -8,7 +8,7 @@ Command-line arguments are not considered by this function.
 const {loadNycConfig} = require('@istanbuljs/load-nyc-config');
 
 console.log(loadNycConfig());
-```;
+```
 
 ## loadNycConfig([options])
 
