@@ -4,6 +4,12 @@ The utility function which NYC uses to load configuration.
 This can be used by outside programs to calculate the configuration.
 Command-line arguments are not considered by this function.
 
+```js
+const {loadNycConfig} = require('@istanbuljs/load-nyc-config');
+
+console.log(loadNycConfig());
+```;
+
 ## loadNycConfig([options])
 
 ### options.cwd

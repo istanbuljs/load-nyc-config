@@ -85,4 +85,6 @@ function loadNycConfig(options = {}) {
 	return config;
 }
 
-module.exports = loadNycConfig;
+module.exports = {
+	loadNycConfig
+};

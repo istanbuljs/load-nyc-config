@@ -1,5 +1,5 @@
 const path = require('path');
-const nycLoadConfig = require('../..');
+const {loadNycConfig} = require('../..');
 
 function fixturePath(...args) {
 	return path.join(__dirname, '..', 'fixtures', ...args);
@@ -8,7 +8,7 @@ function fixturePath(...args) {
 function basicTest(t) {
 	const cwd = fixturePath(t.name);
 
-	t.matchSnapshot(nycLoadConfig({cwd}));
+	t.matchSnapshot(loadNycConfig({cwd}));
 	t.end();
 }
 

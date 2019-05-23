@@ -1,11 +1,11 @@
 const t = require('tap');
 const {fixturePath, basicTest} = require('./helpers');
-const nycLoadConfig = require('..');
+const {loadNycConfig} = require('..');
 
 t.test('options.nycrc points to non-existent file', t => {
 	const cwd = fixturePath();
 	const nycrc = fixturePath('does-not-exist.json');
-	t.throws(() => nycLoadConfig({cwd, nycrc}));
+	t.throws(() => loadNycConfig({cwd, nycrc}));
 	t.end();
 });
 
@@ -22,7 +22,7 @@ t.test('no package.json', t => {
 	const cwd = '/';
 	const nycrc = fixturePath('nycrc-no-ext', '.nycrc');
 
-	t.matchSnapshot(nycLoadConfig({cwd}), 'no config');
-	t.matchSnapshot(nycLoadConfig({cwd, nycrc}), 'explicit .nycrc');
+	t.matchSnapshot(loadNycConfig({cwd}), 'no config');
+	t.matchSnapshot(loadNycConfig({cwd, nycrc}), 'explicit .nycrc');
 	t.end();
 });
