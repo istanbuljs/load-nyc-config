@@ -1,0 +1,8 @@
+*.tgz
+package
+coverage
+.nyc_output
+.taprc
+.travis.yml
+tap-snapshots
+test

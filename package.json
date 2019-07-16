@@ -13,9 +13,6 @@
 		"node": ">=8"
 	},
 	"license": "ISC",
-	"files": [
-		"index.js"
-	],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/istanbuljs/load-nyc-config.git"
