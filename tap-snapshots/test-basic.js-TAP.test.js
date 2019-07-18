@@ -24,11 +24,8 @@ Object {
 
 exports[`test/basic.js TAP camel-decamel > must match snapshot 1`] = `
 Object {
-  "exclude-after-remap": false,
-  "exclude-node-modules": false,
   "excludeAfterRemap": false,
   "excludeNodeModules": false,
-  "skip-full": true,
   "skipFull": true,
 }
 `

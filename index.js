@@ -3,7 +3,6 @@
 const fs = require('fs');
 const path = require('path');
 const camelcase = require('camelcase');
-const decamelize = require('decamelize');
 const findUp = require('find-up');
 
 const standardConfigFiles = [
@@ -14,12 +13,10 @@ const standardConfigFiles = [
 	'nyc.config.js'
 ];
 
-function copyConfigFields(config) {
+function camelcasedConfig(config) {
 	const results = {};
 	for (const [field, value] of Object.entries(config)) {
-		results[field] = value;
 		results[camelcase(field)] = value;
-		results[decamelize(field, '-')] = value;
 	}
 
 	return results;
@@ -71,8 +68,8 @@ function loadNycConfig(options = {}) {
 	}
 
 	const config = {
-		...copyConfigFields(pkgConfig),
-		...copyConfigFields(actualLoad(configFile))
+		...camelcasedConfig(pkgConfig),
+		...camelcasedConfig(actualLoad(configFile))
 	};
 
 	const arrayFields = ['require', 'extension', 'exclude', 'include'];

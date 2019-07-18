@@ -23,7 +23,6 @@
 	"homepage": "https://github.com/istanbuljs/load-nyc-config#readme",
 	"dependencies": {
 		"camelcase": "^5.3.1",
-		"decamelize": "^3.2.0",
 		"find-up": "^4.0.0",
 		"js-yaml": "^3.13.1"
 	},
