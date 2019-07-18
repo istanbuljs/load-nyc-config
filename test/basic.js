@@ -2,10 +2,10 @@ const t = require('tap');
 const {fixturePath, basicTest} = require('./helpers');
 const {loadNycConfig} = require('..');
 
-t.test('options.nycrc points to non-existent file', t => {
+t.test('options.nycrcPath points to non-existent file', t => {
 	const cwd = fixturePath();
-	const nycrc = fixturePath('does-not-exist.json');
-	t.throws(() => loadNycConfig({cwd, nycrc}));
+	const nycrcPath = fixturePath('does-not-exist.json');
+	t.throws(() => loadNycConfig({cwd, nycrcPath}));
 	t.end();
 });
 
@@ -24,17 +24,17 @@ t.test('extends-array', basicTest);
 t.test('extends failures', t => {
 	const errorConfigs = ['looper1.json', 'invalid.json', 'missing.json'];
 	const cwd = fixturePath('extends');
-	errorConfigs.map(f => fixturePath('extends', f)).forEach(nycrc => {
-		t.throws(() => loadNycConfig({cwd, nycrc}));
+	errorConfigs.map(f => fixturePath('extends', f)).forEach(nycrcPath => {
+		t.throws(() => loadNycConfig({cwd, nycrcPath}));
 	});
 	t.end();
 });
 
 t.test('no package.json', t => {
 	const cwd = '/';
-	const nycrc = fixturePath('nycrc-no-ext', '.nycrc');
+	const nycrcPath = fixturePath('nycrc-no-ext', '.nycrc');
 
 	t.matchSnapshot(loadNycConfig({cwd}), 'no config');
-	t.matchSnapshot(loadNycConfig({cwd, nycrc}), 'explicit .nycrc');
+	t.matchSnapshot(loadNycConfig({cwd, nycrcPath}), 'explicit .nycrc');
 	t.end();
 });

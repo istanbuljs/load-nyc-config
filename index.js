@@ -94,10 +94,10 @@ function applyExtends(config, filename, loopCheck = new Set()) {
 
 function loadNycConfig(options = {}) {
 	const {cwd, pkgConfig} = findPackage(options);
-	const configFiles = [].concat(options.nycrc || standardConfigFiles);
+	const configFiles = [].concat(options.nycrcPath || standardConfigFiles);
 	const configFile = findUp.sync(configFiles, {cwd});
-	if (options.nycrc && !configFile) {
-		throw new Error(`Requested configuration file ${options.nycrc} not found`);
+	if (options.nycrcPath && !configFile) {
+		throw new Error(`Requested configuration file ${options.nycrcPath} not found`);
 	}
 
 	const config = {
