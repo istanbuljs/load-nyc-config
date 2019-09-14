@@ -17,7 +17,7 @@ console.log(loadNycConfig());
 Type: `string`
 Default: `cwd` from parent nyc process or `process.cwd()`
 
-### options.nycrc
+### options.nycrcPath
 
 Type: `string`
 Default: `undefined`
