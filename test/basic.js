@@ -17,6 +17,18 @@ t.test('nycrc-yaml', basicTest);
 t.test('nyc-config-js', basicTest);
 t.test('array-field-fixup', basicTest);
 t.test('camel-decamel', basicTest);
+t.test('extends', basicTest);
+t.test('extends-array-empty', basicTest);
+t.test('extends-array', basicTest);
+
+t.test('extends failures', t => {
+	const errorConfigs = ['looper1.json', 'invalid.json', 'missing.json'];
+	const cwd = fixturePath('extends');
+	errorConfigs.map(f => fixturePath('extends', f)).forEach(nycrc => {
+		t.throws(() => loadNycConfig({cwd, nycrc}));
+	});
+	t.end();
+});
 
 t.test('no package.json', t => {
 	const cwd = '/';

@@ -30,6 +30,25 @@ Object {
 }
 `
 
+exports[`test/basic.js TAP extends > must match snapshot 1`] = `
+Object {
+  "all": false,
+}
+`
+
+exports[`test/basic.js TAP extends-array > must match snapshot 1`] = `
+Object {
+  "all": false,
+  "excludeNodeModules": true,
+}
+`
+
+exports[`test/basic.js TAP extends-array-empty > must match snapshot 1`] = `
+Object {
+  "all": true,
+}
+`
+
 exports[`test/basic.js TAP no package.json > explicit .nycrc 1`] = `
 Object {
   "all": false,

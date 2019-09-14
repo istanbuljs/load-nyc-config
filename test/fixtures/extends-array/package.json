@@ -1,0 +1,6 @@
+{
+	"nyc": {
+		"all": true,
+		"extends": ["nyc1.json", "./nyc2.json"]
+	}
+}
