@@ -23,16 +23,22 @@
 	"homepage": "https://github.com/istanbuljs/load-nyc-config#readme",
 	"dependencies": {
 		"camelcase": "^5.3.1",
-		"find-up": "^4.0.0",
+		"find-up": "^4.1.0",
 		"js-yaml": "^3.13.1",
 		"resolve-from": "^5.0.0"
 	},
 	"devDependencies": {
-		"standard-version": "^6.0.1",
-		"tap": "^14.0.0",
-		"xo": "^0.24.0"
+		"standard-version": "^7.0.0",
+		"tap": "^14.6.5",
+		"xo": "^0.25.3"
 	},
 	"xo": {
-		"ignores": "tap-snapshots/**"
+		"ignores": [
+			"test/fixtures/extends/invalid.*",
+			"tap-snapshots/**"
+		],
+		"rules": {
+			"require-atomic-updates": 0
+		}
 	}
 }

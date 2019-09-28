@@ -30,6 +30,18 @@ Object {
 }
 `
 
+exports[`test/basic.js TAP esm nyc-config-js-type-module > must match snapshot 1`] = `
+Object {
+  "all": false,
+}
+`
+
+exports[`test/basic.js TAP esm nyc-config-mjs > must match snapshot 1`] = `
+Object {
+  "all": false,
+}
+`
+
 exports[`test/basic.js TAP extends > must match snapshot 1`] = `
 Object {
   "all": false,
@@ -62,6 +74,12 @@ Object {}
 exports[`test/basic.js TAP no-config-file > must match snapshot 1`] = `
 Object {
   "all": true,
+}
+`
+
+exports[`test/basic.js TAP nyc-config-cjs > must match snapshot 1`] = `
+Object {
+  "all": false,
 }
 `
 

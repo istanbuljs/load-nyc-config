@@ -5,7 +5,7 @@
  * Make sure to inspect the output below.  Do not ignore changes!
  */
 'use strict'
-exports[`test/env-nyc-cwd.js TAP > must match snapshot 1`] = `
+exports[`test/env-nyc-cwd.js TAP env-nyc-cwd > must match snapshot 1`] = `
 Object {
   "all": true,
 }

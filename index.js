@@ -2,17 +2,34 @@
 
 const fs = require('fs');
 const path = require('path');
+const {promisify} = require('util');
 const camelcase = require('camelcase');
 const findUp = require('find-up');
 const resolveFrom = require('resolve-from');
+
+const readFile = promisify(fs.readFile);
 
 const standardConfigFiles = [
 	'.nycrc',
 	'.nycrc.json',
 	'.nycrc.yml',
 	'.nycrc.yaml',
-	'nyc.config.js'
+	'nyc.config.js',
+	'nyc.config.cjs',
+	'nyc.config.mjs'
 ];
+
+async function moduleLoader(file) {
+	try {
+		return require(file);
+	} catch (error) {
+		if (error.code !== 'ERR_REQUIRE_ESM') {
+			throw error;
+		}
+
+		return require('./load-esm')(file);
+	}
+}
 
 function camelcasedConfig(config) {
 	const results = {};
@@ -23,13 +40,13 @@ function camelcasedConfig(config) {
 	return results;
 }
 
-function findPackage(options) {
+async function findPackage(options) {
 	const cwd = options.cwd || process.env.NYC_CWD || process.cwd();
-	const pkgPath = findUp.sync('package.json', {cwd});
+	const pkgPath = await findUp('package.json', {cwd});
 	if (pkgPath) {
 		return {
 			cwd: path.dirname(pkgPath),
-			pkgConfig: JSON.parse(fs.readFileSync(pkgPath, 'utf8')).nyc || {}
+			pkgConfig: JSON.parse(await readFile(pkgPath, 'utf8')).nyc || {}
 		};
 	}
 
@@ -39,7 +56,7 @@ function findPackage(options) {
 	};
 }
 
-function actualLoad(configFile) {
+async function actualLoad(configFile) {
 	if (!configFile) {
 		return {};
 	}
@@ -47,22 +64,21 @@ function actualLoad(configFile) {
 	const configExt = path.extname(configFile).toLowerCase();
 	switch (configExt) {
 		case '.js':
+		case '.mjs':
+			return moduleLoader(configFile);
+		case '.cjs':
 			return require(configFile);
 		case '.yml':
 		case '.yaml':
-			return require('js-yaml').load(
-				fs.readFileSync(configFile, 'utf8')
-			);
+			return require('js-yaml').load(await readFile(configFile, 'utf8'));
 		default:
-			return JSON.parse(
-				fs.readFileSync(configFile, 'utf8')
-			);
+			return JSON.parse(await readFile(configFile, 'utf8'));
 	}
 }
 
-function applyExtends(config, filename, loopCheck = new Set()) {
+async function applyExtends(config, filename, loopCheck = new Set()) {
 	config = camelcasedConfig(config);
-	if (Object.prototype.hasOwnProperty.call(config, 'extends')) {
+	if ('extends' in config) {
 		const extConfigs = [].concat(config.extends);
 		if (extConfigs.some(e => typeof e !== 'string')) {
 			throw new TypeError(`${filename} contains an invalid 'extends' option`);
@@ -70,7 +86,7 @@ function applyExtends(config, filename, loopCheck = new Set()) {
 
 		delete config.extends;
 		const filePath = path.dirname(filename);
-		return extConfigs.reduce((config, extConfig) => {
+		for (const extConfig of extConfigs) {
 			const configFile = resolveFrom.silent(filePath, extConfig) ||
 				resolveFrom.silent(filePath, './' + extConfig);
 			if (!configFile) {
@@ -82,27 +98,28 @@ function applyExtends(config, filename, loopCheck = new Set()) {
 			}
 
 			loopCheck.add(configFile);
-			return {
-				...config,
-				...applyExtends(actualLoad(configFile), configFile, loopCheck)
-			};
-		}, config);
+			Object.assign(
+				config,
+				// eslint-disable-next-line no-await-in-loop
+				await applyExtends(await actualLoad(configFile), configFile, loopCheck)
+			);
+		}
 	}
 
 	return config;
 }
 
-function loadNycConfig(options = {}) {
-	const {cwd, pkgConfig} = findPackage(options);
+async function loadNycConfig(options = {}) {
+	const {cwd, pkgConfig} = await findPackage(options);
 	const configFiles = [].concat(options.nycrcPath || standardConfigFiles);
-	const configFile = findUp.sync(configFiles, {cwd});
+	const configFile = await findUp(configFiles, {cwd});
 	if (options.nycrcPath && !configFile) {
 		throw new Error(`Requested configuration file ${options.nycrcPath} not found`);
 	}
 
 	const config = {
-		...applyExtends(pkgConfig, path.join(cwd, 'package.json')),
-		...applyExtends(actualLoad(configFile), configFile)
+		...(await applyExtends(pkgConfig, path.join(cwd, 'package.json'))),
+		...(await applyExtends(await actualLoad(configFile), configFile))
 	};
 
 	const arrayFields = ['require', 'extension', 'exclude', 'include'];

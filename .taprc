@@ -1,4 +1,5 @@
 {
 	"test-ignore": "helpers",
-	"check-coverage": true
+	"esm": false,
+	"nyc-arg": "--nycrc-path=nyc-settings.js"
 }
