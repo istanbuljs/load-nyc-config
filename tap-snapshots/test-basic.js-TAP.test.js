@@ -77,6 +77,12 @@ Object {
 }
 `
 
+exports[`test/basic.js TAP nyc-config-async > must match snapshot 1`] = `
+Object {
+  "all": false,
+}
+`
+
 exports[`test/basic.js TAP nyc-config-cjs > must match snapshot 1`] = `
 Object {
   "all": false,

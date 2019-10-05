@@ -15,6 +15,7 @@ t.test('nycrc-yml', basicTest);
 t.test('nycrc-yaml', basicTest);
 t.test('nyc-config-cjs', basicTest);
 t.test('nyc-config-js', basicTest);
+t.test('nyc-config-async', basicTest);
 t.test('array-field-fixup', basicTest);
 t.test('camel-decamel', basicTest);
 t.test('extends', basicTest);
