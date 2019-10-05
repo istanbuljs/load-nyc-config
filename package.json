@@ -34,8 +34,7 @@
 	},
 	"xo": {
 		"ignores": [
-			"test/fixtures/extends/invalid.*",
-			"tap-snapshots/**"
+			"test/fixtures/extends/invalid.*"
 		],
 		"rules": {
 			"require-atomic-updates": 0
