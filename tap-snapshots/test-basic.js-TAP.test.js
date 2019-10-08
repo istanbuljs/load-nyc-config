@@ -7,6 +7,7 @@
 'use strict'
 exports[`test/basic.js TAP array-field-fixup > must match snapshot 1`] = `
 Object {
+  "cwd": "array-field-fixup",
   "exclude": Array [
     "test.js",
   ],
@@ -24,6 +25,7 @@ Object {
 
 exports[`test/basic.js TAP camel-decamel > must match snapshot 1`] = `
 Object {
+  "cwd": "camel-decamel",
   "excludeAfterRemap": false,
   "excludeNodeModules": false,
   "skipFull": true,
@@ -33,24 +35,28 @@ Object {
 exports[`test/basic.js TAP esm nyc-config-js-type-module > must match snapshot 1`] = `
 Object {
   "all": false,
+  "cwd": "nyc-config-js-type-module",
 }
 `
 
 exports[`test/basic.js TAP esm nyc-config-mjs > must match snapshot 1`] = `
 Object {
   "all": false,
+  "cwd": "nyc-config-mjs",
 }
 `
 
 exports[`test/basic.js TAP extends > must match snapshot 1`] = `
 Object {
   "all": false,
+  "cwd": "extends",
 }
 `
 
 exports[`test/basic.js TAP extends-array > must match snapshot 1`] = `
 Object {
   "all": false,
+  "cwd": "extends-array",
   "excludeNodeModules": true,
 }
 `
@@ -58,63 +64,82 @@ Object {
 exports[`test/basic.js TAP extends-array-empty > must match snapshot 1`] = `
 Object {
   "all": true,
+  "cwd": "extends-array-empty",
+}
+`
+
+exports[`test/basic.js TAP found package.json cwd from subdir > must match snapshot 1`] = `
+Object {
+  "all": false,
+  "cwd": "nycrc-json",
 }
 `
 
 exports[`test/basic.js TAP no package.json > explicit .nycrc 1`] = `
 Object {
   "all": false,
+  "cwd": "root:;",
 }
 `
 
 exports[`test/basic.js TAP no package.json > no config 1`] = `
-Object {}
+Object {
+  "cwd": "root:;",
+}
 `
 
 exports[`test/basic.js TAP no-config-file > must match snapshot 1`] = `
 Object {
   "all": true,
+  "cwd": "no-config-file",
 }
 `
 
 exports[`test/basic.js TAP nyc-config-async > must match snapshot 1`] = `
 Object {
   "all": false,
+  "cwd": "nyc-config-async",
 }
 `
 
 exports[`test/basic.js TAP nyc-config-cjs > must match snapshot 1`] = `
 Object {
   "all": false,
+  "cwd": "nyc-config-cjs",
 }
 `
 
 exports[`test/basic.js TAP nyc-config-js > must match snapshot 1`] = `
 Object {
   "all": false,
+  "cwd": "nyc-config-js",
 }
 `
 
 exports[`test/basic.js TAP nycrc-json > must match snapshot 1`] = `
 Object {
   "all": false,
+  "cwd": "nycrc-json",
 }
 `
 
 exports[`test/basic.js TAP nycrc-no-ext > must match snapshot 1`] = `
 Object {
   "all": false,
+  "cwd": "nycrc-no-ext",
 }
 `
 
 exports[`test/basic.js TAP nycrc-yaml > must match snapshot 1`] = `
 Object {
   "all": false,
+  "cwd": "nycrc-yaml",
 }
 `
 
 exports[`test/basic.js TAP nycrc-yml > must match snapshot 1`] = `
 Object {
   "all": false,
+  "cwd": "nycrc-yml",
 }
 `

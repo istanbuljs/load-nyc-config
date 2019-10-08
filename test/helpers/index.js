@@ -5,10 +5,21 @@ function fixturePath(...args) {
 	return path.join(__dirname, '..', 'fixtures', ...args);
 }
 
+function sanitizeConfig(config) {
+	if (config.cwd === path.resolve('/')) {
+		config.cwd = 'root:;';
+	} else {
+		config.cwd = path.basename(config.cwd);
+	}
+
+	return config;
+}
+
 async function basicTest(t) {
 	const cwd = fixturePath(t.name);
+	const config = await loadNycConfig({cwd});
 
-	t.matchSnapshot(await loadNycConfig({cwd}));
+	t.matchSnapshot(sanitizeConfig(config));
 }
 
 function canImport() {
@@ -35,6 +46,7 @@ async function hasESM() {
 
 module.exports = {
 	fixturePath,
+	sanitizeConfig,
 	basicTest,
 	hasImport: canImport(),
 	hasESM

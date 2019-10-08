@@ -8,5 +8,6 @@
 exports[`test/env-nyc-cwd.js TAP env-nyc-cwd > must match snapshot 1`] = `
 Object {
   "all": true,
+  "cwd": "no-config-file",
 }
 `

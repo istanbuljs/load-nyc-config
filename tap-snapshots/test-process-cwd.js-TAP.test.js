@@ -8,5 +8,6 @@
 exports[`test/process-cwd.js TAP process-cwd > must match snapshot 1`] = `
 Object {
   "all": true,
+  "cwd": "no-config-file",
 }
 `
