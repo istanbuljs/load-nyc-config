@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-alpha.1](https://github.com/istanbuljs/load-nyc-config/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2019-10-08)
+
+
+### Bug Fixes
+
+* Add `cwd` to returned config object ([#8](https://github.com/istanbuljs/load-nyc-config/issues/8)) ([cb5184a](https://github.com/istanbuljs/load-nyc-config/commit/cb5184a))
+
 ## 1.0.0-alpha.0 (2019-10-06)
 
 
