@@ -118,6 +118,7 @@ async function loadNycConfig(options = {}) {
 	}
 
 	const config = {
+		cwd,
 		...(await applyExtends(pkgConfig, path.join(cwd, 'package.json'))),
 		...(await applyExtends(await actualLoad(configFile), configFile))
 	};

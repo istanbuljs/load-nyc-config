@@ -1,5 +1,6 @@
+const path = require('path');
 const t = require('tap');
-const {fixturePath, basicTest, hasImport, hasESM} = require('./helpers');
+const {fixturePath, sanitizeConfig, basicTest, hasImport, hasESM} = require('./helpers');
 const {loadNycConfig} = require('..');
 
 t.test('options.nycrcPath points to non-existent file', async t => {
@@ -46,11 +47,16 @@ t.test('extends failures', async t => {
 });
 
 t.test('no package.json', async t => {
-	const cwd = '/';
+	const cwd = path.resolve('/');
 	const nycrcPath = fixturePath('nycrc-no-ext', '.nycrc');
 
-	t.matchSnapshot(await loadNycConfig({cwd}), 'no config');
-	t.matchSnapshot(await loadNycConfig({cwd, nycrcPath}), 'explicit .nycrc');
+	t.matchSnapshot(sanitizeConfig(await loadNycConfig({cwd})), 'no config');
+	t.matchSnapshot(sanitizeConfig(await loadNycConfig({cwd, nycrcPath})), 'explicit .nycrc');
+});
+
+t.test('found package.json cwd from subdir', async t => {
+	const cwd = fixturePath('nycrc-json', 'subdir');
+	t.matchSnapshot(sanitizeConfig(await loadNycConfig({cwd})));
 });
 
 if (hasImport) {
