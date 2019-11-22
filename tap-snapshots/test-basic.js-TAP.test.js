@@ -32,20 +32,6 @@ Object {
 }
 `
 
-exports[`test/basic.js TAP esm nyc-config-js-type-module > must match snapshot 1`] = `
-Object {
-  "all": false,
-  "cwd": "nyc-config-js-type-module",
-}
-`
-
-exports[`test/basic.js TAP esm nyc-config-mjs > must match snapshot 1`] = `
-Object {
-  "all": false,
-  "cwd": "nyc-config-mjs",
-}
-`
-
 exports[`test/basic.js TAP extends > must match snapshot 1`] = `
 Object {
   "all": false,
@@ -113,6 +99,13 @@ exports[`test/basic.js TAP nyc-config-js > must match snapshot 1`] = `
 Object {
   "all": false,
   "cwd": "nyc-config-js",
+}
+`
+
+exports[`test/basic.js TAP nyc-config-mjs > must match snapshot 1`] = `
+Object {
+  "all": false,
+  "cwd": "nyc-config-mjs",
 }
 `
 

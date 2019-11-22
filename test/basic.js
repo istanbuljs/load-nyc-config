@@ -1,6 +1,6 @@
 const path = require('path');
 const t = require('tap');
-const {fixturePath, sanitizeConfig, basicTest, hasImport, hasESM} = require('./helpers');
+const {fixturePath, sanitizeConfig, basicTest, hasESM} = require('./helpers');
 const {loadNycConfig} = require('..');
 
 t.test('options.nycrcPath points to non-existent file', async t => {
@@ -32,7 +32,7 @@ t.test('extends failures', async t => {
 		'invalid.cjs': /Unexpected identifier/,
 		'missing.json': /Could not resolve configuration file/
 	};
-	if (hasImport && await hasESM()) {
+	if (hasESM) {
 		files['invalid.mjs'] = /has no default export/;
 	}
 
@@ -59,16 +59,6 @@ t.test('found package.json cwd from subdir', async t => {
 	t.matchSnapshot(sanitizeConfig(await loadNycConfig({cwd})));
 });
 
-if (hasImport) {
-	t.test('esm', async t => {
-		if (await hasESM()) {
-			if (process.versions.node.split('.')[0] >= 12) {
-				await t.test('nyc-config-js-type-module', basicTest);
-			}
-
-			await t.test('nyc-config-mjs', basicTest);
-		} else {
-			t.pass('we have import but it doesn\'t support ES modules');
-		}
-	});
+if (hasESM) {
+	t.test('nyc-config-mjs', basicTest);
 }

@@ -19,18 +19,6 @@ const standardConfigFiles = [
 	'nyc.config.mjs'
 ];
 
-async function moduleLoader(file) {
-	try {
-		return require(file);
-	} catch (error) {
-		if (error.code !== 'ERR_REQUIRE_ESM') {
-			throw error;
-		}
-
-		return require('./load-esm')(file);
-	}
-}
-
 function camelcasedConfig(config) {
 	const results = {};
 	for (const [field, value] of Object.entries(config)) {
@@ -64,10 +52,11 @@ async function actualLoad(configFile) {
 	const configExt = path.extname(configFile).toLowerCase();
 	switch (configExt) {
 		case '.js':
-		case '.mjs':
-			return moduleLoader(configFile);
 		case '.cjs':
 			return require(configFile);
+		/* istanbul ignore next: coverage for 13.2.0+ is shown in load-esm.js */
+		case '.mjs':
+			return require('./load-esm')(configFile);
 		case '.yml':
 		case '.yaml':
 			return require('js-yaml').load(await readFile(configFile, 'utf8'));
