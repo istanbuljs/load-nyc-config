@@ -1,8 +1,11 @@
 const path = require('path');
+const semver = require('semver');
 const {loadNycConfig} = require('../..');
 
+const hasESM = semver.gte(process.versions.node, '13.2.0');
+
 function fixturePath(...args) {
-	return path.join(__dirname, '..', 'fixtures', ...args);
+	return path.resolve(__dirname, '..', 'fixtures', ...args);
 }
 
 function sanitizeConfig(config) {
@@ -22,32 +25,9 @@ async function basicTest(t) {
 	t.matchSnapshot(sanitizeConfig(config));
 }
 
-function canImport() {
-	try {
-		return typeof require('../../load-esm') === 'function';
-	} catch (_) {
-		return false;
-	}
-}
-
-async function hasESM() {
-	try {
-		const loader = require('../../load-esm');
-		try {
-			await loader(require.resolve('./esm-tester.mjs'));
-			return true;
-		} catch (_) {
-			return false;
-		}
-	} catch (_) {
-		return false;
-	}
-}
-
 module.exports = {
 	fixturePath,
 	sanitizeConfig,
 	basicTest,
-	hasImport: canImport(),
 	hasESM
 };

@@ -1,12 +1,12 @@
 'use strict';
 
-const {hasImport} = require('./test/helpers');
+const {hasESM} = require('./test/helpers');
 
 const include = [
 	'index.js'
 ];
 
-if (hasImport) {
+if (hasESM) {
 	include.push('load-esm.js');
 }
 

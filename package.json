@@ -28,6 +28,7 @@
 		"resolve-from": "^5.0.0"
 	},
 	"devDependencies": {
+		"semver": "^6.3.0",
 		"standard-version": "^7.0.0",
 		"tap": "^14.6.5",
 		"xo": "^0.25.3"
