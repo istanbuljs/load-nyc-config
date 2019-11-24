@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-alpha.2](https://github.com/istanbuljs/load-nyc-config/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2019-11-24)
+
+
+### Bug Fixes
+
+* Remove support for loading .js config under `type: 'module'` ([#10](https://github.com/istanbuljs/load-nyc-config/issues/10)) ([420fe87](https://github.com/istanbuljs/load-nyc-config/commit/420fe87da7dde3e9d98ef07f0a8a03d2b4d1dcb1))
+* Resolve cwd per config that sets it ([#9](https://github.com/istanbuljs/load-nyc-config/issues/9)) ([649efdc](https://github.com/istanbuljs/load-nyc-config/commit/649efdcda405c476764eebcf15af5da542fb21e1))
+
 ## [1.0.0-alpha.1](https://github.com/istanbuljs/load-nyc-config/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2019-10-08)
 
 
