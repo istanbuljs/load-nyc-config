@@ -20,8 +20,10 @@ t.test('nyc-config-async', basicTest);
 t.test('array-field-fixup', basicTest);
 t.test('camel-decamel', basicTest);
 t.test('extends', basicTest);
+t.test('extends-cwd', basicTest);
 t.test('extends-array-empty', basicTest);
 t.test('extends-array', basicTest);
+t.test('package-lock-cwd', basicTest);
 
 t.test('extends failures', async t => {
 	const cwd = fixturePath('extends');

@@ -32,9 +32,14 @@ async function findPackage(options) {
 	const cwd = options.cwd || process.env.NYC_CWD || process.cwd();
 	const pkgPath = await findUp('package.json', {cwd});
 	if (pkgPath) {
+		const pkgConfig = JSON.parse(await readFile(pkgPath, 'utf8')).nyc || {};
+		if ('cwd' in pkgConfig) {
+			pkgConfig.cwd = path.resolve(path.dirname(pkgPath), pkgConfig.cwd);
+		}
+
 		return {
 			cwd: path.dirname(pkgPath),
-			pkgConfig: JSON.parse(await readFile(pkgPath, 'utf8')).nyc || {}
+			pkgConfig
 		};
 	}
 
@@ -87,10 +92,17 @@ async function applyExtends(config, filename, loopCheck = new Set()) {
 			}
 
 			loopCheck.add(configFile);
+
+			// eslint-disable-next-line no-await-in-loop
+			const configLoaded = await actualLoad(configFile);
+			if ('cwd' in configLoaded) {
+				configLoaded.cwd = path.resolve(path.dirname(configFile), configLoaded.cwd);
+			}
+
 			Object.assign(
 				config,
 				// eslint-disable-next-line no-await-in-loop
-				await applyExtends(await actualLoad(configFile), configFile, loopCheck)
+				await applyExtends(configLoaded, configFile, loopCheck)
 			);
 		}
 	}
