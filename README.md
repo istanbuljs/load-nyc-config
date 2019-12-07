@@ -41,3 +41,9 @@ Configuration is first loaded from `package.json` if found, this serves as the p
 defaults.  These options can be overridden by an nycrc if found.  Arrays are not merged,
 so if `package.json` sets `"require": ["@babel/register"]` and `.nycrc` sets `"require": ["esm"]`
 the effective require setting will only include `"esm"`.
+
+## `@istanbuljs/load-nyc-config` for enterprise
+
+Available as part of the Tidelift Subscription.
+
+The maintainers of `@istanbuljs/load-nyc-config` and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use. [Learn more.](https://tidelift.com/subscription/pkg/npm-istanbuljs-load-nyc-config?utm_source=npm-istanbuljs-load-nyc-config&utm_medium=referral&utm_campaign=enterprise)
