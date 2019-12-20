@@ -1,6 +1,6 @@
 {
 	"name": "@istanbuljs/load-nyc-config",
-	"version": "1.0.0-alpha.2",
+	"version": "1.0.0",
 	"description": "Utility function to load nyc configuration",
 	"main": "index.js",
 	"scripts": {

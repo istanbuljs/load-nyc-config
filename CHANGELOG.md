@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/istanbuljs/load-nyc-config/compare/v1.0.0-alpha.2...v1.0.0) (2019-12-20)
+
+
+### Features
+
+* Version bump only ([#11](https://github.com/istanbuljs/load-nyc-config/issues/11)) ([8c3f1be](https://github.com/istanbuljs/load-nyc-config/commit/8c3f1be8d4d30161088a79878c02210db4c2fbfb))
+
 ## [1.0.0-alpha.2](https://github.com/istanbuljs/load-nyc-config/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2019-11-24)
 
 
