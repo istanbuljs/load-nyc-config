@@ -7,7 +7,9 @@ Command-line arguments are not considered by this function.
 ```js
 const {loadNycConfig} = require('@istanbuljs/load-nyc-config');
 
-console.log(loadNycConfig());
+(async () {
+console.log(await loadNycConfig());
+})();
 ```
 
 ## loadNycConfig([options])
