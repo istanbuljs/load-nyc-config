@@ -109,6 +109,13 @@ Object {
 }
 `
 
+exports[`test/basic.js TAP nyc-config-js-type-module > must match snapshot 1`] = `
+Object {
+  "all": false,
+  "cwd": "package-root:;test/fixtures/nyc-config-js-type-module",
+}
+`
+
 exports[`test/basic.js TAP nyc-config-mjs > must match snapshot 1`] = `
 Object {
   "all": false,

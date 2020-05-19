@@ -63,4 +63,5 @@ t.test('found package.json cwd from subdir', async t => {
 
 if (hasESM) {
 	t.test('nyc-config-mjs', basicTest);
+	t.test('nyc-config-js-type-module', basicTest);
 }

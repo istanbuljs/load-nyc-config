@@ -6,6 +6,7 @@ const {promisify} = require('util');
 const camelcase = require('camelcase');
 const findUp = require('find-up');
 const resolveFrom = require('resolve-from');
+const getPackageType = require('get-package-type');
 
 const readFile = promisify(fs.readFile);
 
@@ -57,6 +58,12 @@ async function actualLoad(configFile) {
 	const configExt = path.extname(configFile).toLowerCase();
 	switch (configExt) {
 		case '.js':
+			/* istanbul ignore next: coverage for 13.2.0+ is shown in load-esm.js */
+			if (await getPackageType(configFile) === 'module') {
+				return require('./load-esm')(configFile);
+			}
+
+			/* fallthrough */
 		case '.cjs':
 			return require(configFile);
 		/* istanbul ignore next: coverage for 13.2.0+ is shown in load-esm.js */
