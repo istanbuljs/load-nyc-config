@@ -1,3 +1,5 @@
 'use strict';
 
-module.exports = {all: false};
+const {isLoading} = require('../../../index.js');
+
+module.exports = {all: !isLoading()};

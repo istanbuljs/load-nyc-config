@@ -46,6 +46,17 @@ defaults.  These options can be overridden by an nycrc if found.  Arrays are not
 so if `package.json` sets `"require": ["@babel/register"]` and `.nycrc` sets `"require": ["esm"]`
 the effective require setting will only include `"esm"`.
 
+## isLoading
+
+```js
+const {isLoading} = require('@istanbuljs/load-nyc-config');
+
+console.log(isLoading());
+```
+
+In some cases source transformation hooks can get installed before the configuration is
+loaded.  This allows hooks to ignore source loads that occur during configuration load.
+
 ## `@istanbuljs/load-nyc-config` for enterprise
 
 Available as part of the Tidelift Subscription.
