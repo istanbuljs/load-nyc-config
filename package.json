@@ -40,7 +40,10 @@
 		],
 		"rules": {
 			"require-atomic-updates": 0,
-			"capitalized-comments": 0
+			"capitalized-comments": 0,
+			"unicorn/import-index": 0,
+			"import/extensions": 0,
+			"import/no-useless-path-segments": 0
 		}
 	}
 }

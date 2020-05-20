@@ -10,6 +10,12 @@ const getPackageType = require('get-package-type');
 
 const readFile = promisify(fs.readFile);
 
+let loadActive = false;
+
+function isLoading() {
+	return loadActive;
+}
+
 const standardConfigFiles = [
 	'.nycrc',
 	'.nycrc.json',
@@ -77,6 +83,19 @@ async function actualLoad(configFile) {
 	}
 }
 
+async function loadFile(configFile) {
+	/* This lets @istanbuljs/esm-loader-hook avoid circular initialization when loading
+	 * configuration.  This should generally only happen when the loader hook is active
+	 * on the main nyc process. */
+	loadActive = true;
+
+	try {
+		return await actualLoad(configFile);
+	} finally {
+		loadActive = false;
+	}
+}
+
 async function applyExtends(config, filename, loopCheck = new Set()) {
 	config = camelcasedConfig(config);
 	if ('extends' in config) {
@@ -101,7 +120,7 @@ async function applyExtends(config, filename, loopCheck = new Set()) {
 			loopCheck.add(configFile);
 
 			// eslint-disable-next-line no-await-in-loop
-			const configLoaded = await actualLoad(configFile);
+			const configLoaded = await loadFile(configFile);
 			if ('cwd' in configLoaded) {
 				configLoaded.cwd = path.resolve(path.dirname(configFile), configLoaded.cwd);
 			}
@@ -128,7 +147,7 @@ async function loadNycConfig(options = {}) {
 	const config = {
 		cwd,
 		...(await applyExtends(pkgConfig, path.join(cwd, 'package.json'))),
-		...(await applyExtends(await actualLoad(configFile), configFile))
+		...(await applyExtends(await loadFile(configFile), configFile))
 	};
 
 	const arrayFields = ['require', 'extension', 'exclude', 'include'];
@@ -142,5 +161,6 @@ async function loadNycConfig(options = {}) {
 }
 
 module.exports = {
-	loadNycConfig
+	loadNycConfig,
+	isLoading
 };
