@@ -36,6 +36,8 @@ If no nycrc option is provided the default priority of config files are:
 * .nycrc.yml
 * .nycrc.yaml
 * nyc.config.js
+* nyc.config.cjs
+* nyc.config.mjs
 
 ## Configuration merging
 
