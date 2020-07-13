@@ -30,7 +30,7 @@
 	},
 	"devDependencies": {
 		"semver": "^6.3.0",
-		"standard-version": "^7.0.0",
+		"standard-version": "^8.0.1",
 		"tap": "^14.10.5",
 		"xo": "^0.25.3"
 	},
