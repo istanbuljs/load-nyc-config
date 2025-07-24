@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const {promisify} = require('util');
 const camelcase = require('camelcase');
-const findUp = require('find-up');
+const {file: findUp, any: findAnyUp} = require('empathic/find');
 const resolveFrom = require('resolve-from');
 const getPackageType = require('get-package-type');
 
@@ -37,7 +37,7 @@ function camelcasedConfig(config) {
 
 async function findPackage(options) {
 	const cwd = options.cwd || process.env.NYC_CWD || process.cwd();
-	const pkgPath = await findUp('package.json', {cwd});
+	const pkgPath = findUp('package.json', {cwd});
 	if (pkgPath) {
 		const pkgConfig = JSON.parse(await readFile(pkgPath, 'utf8')).nyc || {};
 		if ('cwd' in pkgConfig) {
@@ -139,7 +139,7 @@ async function applyExtends(config, filename, loopCheck = new Set()) {
 async function loadNycConfig(options = {}) {
 	const {cwd, pkgConfig} = await findPackage(options);
 	const configFiles = [].concat(options.nycrcPath || standardConfigFiles);
-	const configFile = await findUp(configFiles, {cwd});
+	const configFile = findAnyUp(configFiles, {cwd});
 	if (options.nycrcPath && !configFile) {
 		throw new Error(`Requested configuration file ${options.nycrcPath} not found`);
 	}
