@@ -1,14 +1,13 @@
-const path = require('path');
-const semver = require('semver');
-const {loadNycConfig} = require('../..');
+import path from 'path';
+import {fileURLToPath} from 'url';
 
-const hasESM = semver.gte(process.versions.node, '13.2.0');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-function fixturePath(...args) {
+export function fixturePath(...args) {
 	return path.resolve(__dirname, '..', 'fixtures', ...args);
 }
 
-function sanitizeConfig(config) {
+export function sanitizeConfig(config) {
 	if (config.cwd === path.resolve('/')) {
 		config.cwd = 'root:;';
 	} else {
@@ -18,17 +17,3 @@ function sanitizeConfig(config) {
 
 	return config;
 }
-
-async function basicTest(t) {
-	const cwd = fixturePath(t.name);
-	const config = await loadNycConfig({cwd});
-
-	t.matchSnapshot(sanitizeConfig(config));
-}
-
-module.exports = {
-	fixturePath,
-	sanitizeConfig,
-	basicTest,
-	hasESM
-};
