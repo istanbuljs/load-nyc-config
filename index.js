@@ -1,18 +1,14 @@
-'use strict';
-
-const fs = require('fs');
-const path = require('path');
-const {promisify} = require('util');
-const camelcase = require('camelcase');
-const findUp = require('find-up');
-const resolveFrom = require('resolve-from');
-const getPackageType = require('get-package-type');
-
-const readFile = promisify(fs.readFile);
+import path from 'path';
+import {readFile} from 'fs/promises';
+import {pathToFileURL} from 'url';
+import camelcase from 'camelcase';
+import {findUp} from 'find-up';
+import resolveFrom from 'resolve-from';
+import getPackageType from 'get-package-type';
 
 let loadActive = false;
 
-function isLoading() {
+export function isLoading() {
 	return loadActive;
 }
 
@@ -64,20 +60,18 @@ async function actualLoad(configFile) {
 	const configExt = path.extname(configFile).toLowerCase();
 	switch (configExt) {
 		case '.js':
-			/* istanbul ignore next: coverage for 13.2.0+ is shown in load-esm.js */
 			if (await getPackageType(configFile) === 'module') {
-				return require('./load-esm')(configFile);
+				return (await import('./load-esm.js')).default(configFile);
 			}
 
 			/* fallthrough */
 		case '.cjs':
-			return require(configFile);
-		/* istanbul ignore next: coverage for 13.2.0+ is shown in load-esm.js */
+			return (await import(pathToFileURL(configFile))).default;
 		case '.mjs':
-			return require('./load-esm')(configFile);
+			return (await import('./load-esm.js')).default(configFile);
 		case '.yml':
 		case '.yaml':
-			return require('js-yaml').load(await readFile(configFile, 'utf8'));
+			return (await import('yaml')).default.parse(await readFile(configFile, 'utf8'));
 		default:
 			return JSON.parse(await readFile(configFile, 'utf8'));
 	}
@@ -136,7 +130,7 @@ async function applyExtends(config, filename, loopCheck = new Set()) {
 	return config;
 }
 
-async function loadNycConfig(options = {}) {
+export async function loadNycConfig(options = {}) {
 	const {cwd, pkgConfig} = await findPackage(options);
 	const configFiles = [].concat(options.nycrcPath || standardConfigFiles);
 	const configFile = await findUp(configFiles, {cwd});
@@ -160,7 +154,7 @@ async function loadNycConfig(options = {}) {
 	return config;
 }
 
-module.exports = {
-	loadNycConfig,
-	isLoading
+export default {
+    isLoading,
+    loadNycConfig
 };
