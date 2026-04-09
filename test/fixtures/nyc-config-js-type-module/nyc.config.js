@@ -1,6 +1,4 @@
-import loadNycConfig from '../../../index.js';
-
-const {isLoading} = loadNycConfig;
+import {isLoading} from '../../../index.js';
 
 export default {
 	all: !isLoading()
