@@ -125,10 +125,10 @@ async function applyExtends(config, filename, loopCheck = new Set()) {
 				configLoaded.cwd = path.resolve(path.dirname(configFile), configLoaded.cwd);
 			}
 
-			Object.assign(
-				config,
+			config = Object.assign(
 				// eslint-disable-next-line no-await-in-loop
-				await applyExtends(configLoaded, configFile, loopCheck)
+				await applyExtends(configLoaded, configFile, loopCheck),
+				config
 			);
 		}
 	}
