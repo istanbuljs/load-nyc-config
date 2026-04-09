@@ -5,6 +5,9 @@ import camelcase from 'camelcase';
 import {findUp} from 'find-up';
 import resolveFrom from 'resolve-from';
 import getPackageType from 'get-package-type';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
 
 let loadActive = false;
 
@@ -66,7 +69,7 @@ async function actualLoad(configFile) {
 
 			/* fallthrough */
 		case '.cjs':
-			return (await import(pathToFileURL(configFile))).default;
+			return require(configFile);
 		case '.mjs':
 			return (await import('./load-esm.js')).default(configFile);
 		case '.yml':
