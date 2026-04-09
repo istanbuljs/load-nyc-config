@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/istanbuljs/load-nyc-config/compare/v1.1.0...v2.0.0) (2026-04-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update dependencies (requires node.js 20)
+
+### Bug Fixes
+
+* Update dependencies (requires node.js 20) ([0a603e0](https://github.com/istanbuljs/load-nyc-config/commit/0a603e0ac97daedccb159d4b0012ab1c1285ccbc))
+
 ## [1.1.0](https://github.com/istanbuljs/load-nyc-config/compare/v1.0.0...v1.1.0) (2020-05-20)
 
 
